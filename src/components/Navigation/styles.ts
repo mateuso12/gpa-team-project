@@ -1,5 +1,6 @@
 import { styled } from '@mui/material/styles'
 import { Box, Avatar } from '@mui/material'
+import { NavLink } from 'react-router-dom'
 
 export const HeaderContainer = styled(Box)`
   display: flex;
@@ -41,4 +42,14 @@ export const HeaderContainer = styled(Box)`
 export const UserImage = styled(Avatar)`
   height: 26px;
   width: 26px;
+`
+
+export const SideBarButton = styled(NavLink)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &.active {
+    background-color: #d9d9d9;
+  }
 `

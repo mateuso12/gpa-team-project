@@ -7,7 +7,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material'
-import { NavLink } from 'react-router-dom'
+import { SideBarButton } from './styles'
 
 interface ListButtonsProps {
   open: Boolean
@@ -33,57 +33,60 @@ export function ListSideButtons({ open }: ListButtonsProps) {
   return (
     <List>
       <ListItem disablePadding sx={{ display: 'block' }}>
-        <ListItemButton sx={listItemButtonStyleProps}>
-          <NavLink to="/search">
+        <SideBarButton to="/search">
+          <ListItemButton sx={listItemButtonStyleProps}>
             <ListItemIcon sx={listItemIconStyleProps}>
               <Search />
             </ListItemIcon>
-          </NavLink>
-          <Input placeholder="Pesquisar..." sx={listItemTextStyleProps} />
-        </ListItemButton>
+            <Input placeholder="Pesquisar..." sx={listItemTextStyleProps} />
+          </ListItemButton>
+        </SideBarButton>
       </ListItem>
       <ListItem disablePadding sx={{ display: 'block' }}>
-        <ListItemButton sx={listItemButtonStyleProps}>
-          <NavLink to="/">
+        <SideBarButton to="/home">
+          <ListItemButton sx={listItemButtonStyleProps}>
             <ListItemIcon sx={listItemIconStyleProps}>
               <Store />
             </ListItemIcon>
-          </NavLink>
-          <ListItemText primary="Tela Inicial" sx={listItemTextStyleProps} />
-        </ListItemButton>
+            <ListItemText primary="Tela Inicial" sx={listItemTextStyleProps} />
+          </ListItemButton>
+        </SideBarButton>
       </ListItem>
       <ListItem disablePadding sx={{ display: 'block' }}>
-        <ListItemButton sx={listItemButtonStyleProps}>
-          <NavLink to="/cart">
+        <SideBarButton to="/cart">
+          <ListItemButton sx={listItemButtonStyleProps}>
             <ListItemIcon sx={listItemIconStyleProps}>
               <img src="/src/assets/cart.svg" alt="Carrinho de compras" />
             </ListItemIcon>
-          </NavLink>
-          <ListItemText
-            primary="Status da compra"
-            sx={listItemTextStyleProps}
-          />
-        </ListItemButton>
+            <ListItemText
+              primary="Status da compra"
+              sx={listItemTextStyleProps}
+            />
+          </ListItemButton>
+        </SideBarButton>
       </ListItem>
       <ListItem disablePadding sx={{ display: 'block' }}>
-        <ListItemButton sx={listItemButtonStyleProps}>
-          <NavLink to="/freightManagement">
+        <SideBarButton to="/freightManagement">
+          <ListItemButton sx={listItemButtonStyleProps}>
             <ListItemIcon sx={listItemIconStyleProps}>
               <LocalShipping />
             </ListItemIcon>
-          </NavLink>
-          <ListItemText primary="Gestão de Frete" sx={listItemTextStyleProps} />
-        </ListItemButton>
+            <ListItemText
+              primary="Gestão de Frete"
+              sx={listItemTextStyleProps}
+            />
+          </ListItemButton>
+        </SideBarButton>
       </ListItem>
       <ListItem disablePadding sx={{ display: 'block' }}>
-        <ListItemButton sx={listItemButtonStyleProps}>
-          <NavLink to="/logout">
+        <SideBarButton to="/logout">
+          <ListItemButton sx={listItemButtonStyleProps}>
             <ListItemIcon sx={listItemIconStyleProps}>
               <ExitToApp />
             </ListItemIcon>
-          </NavLink>
-          <ListItemText primary="Tela Inicial" sx={listItemTextStyleProps} />
-        </ListItemButton>
+            <ListItemText primary="Tela Inicial" sx={listItemTextStyleProps} />
+          </ListItemButton>
+        </SideBarButton>
       </ListItem>
     </List>
   )
