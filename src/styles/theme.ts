@@ -28,5 +28,14 @@ export const theme = createTheme({
       color: '#26272A',
       letterSpacing: '0.15em',
     },
+    h3: {
+      fontSize: '0.875rem',
+      fontWeight: 400,
+      color: '#26272A',
+    },
+    subtitle1: {
+      fontSize: '0.75rem',
+      fontWeight: 400,
+    },
   },
 })
