@@ -14,10 +14,11 @@
     "@emotion/styled": "^11.10.4",
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.5",
+    "@types/axios": "^0.14.0",
+    "axios": "^0.27.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.0",
-    "styled-components": "^5.3.5"
+    "react-router-dom": "^6.4.0"
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^1.1.3",

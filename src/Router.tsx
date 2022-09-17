@@ -1,7 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
 import { DefaultLayout } from './layouts/DefaultLayout'
-import { FreightManagement } from './pages/FreightManagement'
+import { Cart } from './pages/Cart'
+import { FreightManagement } from './pages/FreightManagement/index'
 import { Home } from './pages/Home'
+import { Logout } from './pages/Logout'
 import { Search } from './pages/Search'
 
 export function Router() {
@@ -9,10 +11,10 @@ export function Router() {
     <Routes>
       <Route path="/" element={<DefaultLayout />}>
         <Route path="/search" element={<Search />} />
-        <Route path="/" element={<Home />} />
-        <Route path="/cart" />
+        <Route path="/home" element={<Home />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/freightManagement" element={<FreightManagement />} />
-        <Route path="/logout" />
+        <Route path="/logout" element={<Logout />} />
       </Route>
     </Routes>
   )
