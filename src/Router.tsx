@@ -9,7 +9,7 @@ import { Search } from './pages/Search'
 export function Router() {
   return (
     <Routes>
-      <Route path="/home" element={<DefaultLayout />}>
+      <Route path="/" element={<DefaultLayout />}>
         <Route path="/search" element={<Search />} />
         <Route path="/home" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
