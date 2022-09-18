@@ -28,15 +28,20 @@ export function ShippingCompanyTable() {
 
   return (
     <Styled.Container>
-      <Styled.ButtonsContainer>
-        <Styled.DownloadTableButton>
-          <CloudDownload /> Baixar Tabela
-        </Styled.DownloadTableButton>
-        <Styled.CreateButton onClick={handleClickOpenModal}>
-          <Add scale={50} />
-          Criar
-        </Styled.CreateButton>
-      </Styled.ButtonsContainer>
+      <Styled.Header>
+        <div>
+          <Typography variant="body2">4 Itens selecionados</Typography>
+        </div>
+        <div>
+          <Styled.DownloadTableButton>
+            <CloudDownload /> Baixar Tabela
+          </Styled.DownloadTableButton>
+          <Styled.CreateButton onClick={handleClickOpenModal}>
+            <Add />
+            Criar
+          </Styled.CreateButton>
+        </div>
+      </Styled.Header>
       <TableContainer component={Paper} sx={{ border: '1px solid #E0E0E0' }}>
         <Table sx={{ minWidth: 650, borderCollapse: 'collapse' }}>
           <TableHead>
@@ -81,72 +86,20 @@ export function ShippingCompanyTable() {
                 </IconButton>
               </TableCell>
             </TableRow>
-            <TableRow>
-              <TableCell>
-                <Checkbox />
-              </TableCell>
-              <TableCell>123124</TableCell>
-              <TableCell>Transportadora 1</TableCell>
-              <TableCell>Tecnologia</TableCell>
-              <TableCell>1721 </TableCell>
-              <TableCell>Ativo</TableCell>
-              <TableCell>
-                <IconButton>
-                  <img src="/src/assets/edit.svg" alt="" />
-                </IconButton>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Checkbox />
-              </TableCell>
-              <TableCell>123124</TableCell>
-              <TableCell>Transportadora 1</TableCell>
-              <TableCell>Tecnologia</TableCell>
-              <TableCell>1721 </TableCell>
-              <TableCell>Ativo</TableCell>
-              <TableCell>
-                <IconButton>
-                  <img src="/src/assets/edit.svg" alt="" />
-                </IconButton>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Checkbox />
-              </TableCell>
-              <TableCell>123124</TableCell>
-              <TableCell>Transportadora 1</TableCell>
-              <TableCell>Tecnologia</TableCell>
-              <TableCell>1721 </TableCell>
-              <TableCell>Ativo</TableCell>
-              <TableCell>
-                <IconButton>
-                  <img src="/src/assets/edit.svg" alt="" />
-                </IconButton>
-              </TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>
-                <Checkbox />
-              </TableCell>
-              <TableCell>123124</TableCell>
-              <TableCell>Transportadora 1</TableCell>
-              <TableCell>Tecnologia</TableCell>
-              <TableCell>1721 </TableCell>
-              <TableCell>Ativo</TableCell>
-              <TableCell>
-                <IconButton>
-                  <img src="/src/assets/edit.svg" alt="" />
-                </IconButton>
-              </TableCell>
-            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
+      {/* <TablePagination
+        rowsPerPageOptions={[5, 10, 25]}
+        component="div"
+        // count={rows.length}
+        // rowsPerPage={rowsPerPage}
+        // page={page}
+        // onPageChange={handleChangePage}
+        // onRowsPerPageChange={handleChangeRowsPerPage}
+      /> */}
       <ModalAddOrEditItem
         open={openModal}
-        title={'Editar Item Cadastrado'}
         handleClickCloseModal={handleClickCloseModal}
       />
     </Styled.Container>
