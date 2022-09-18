@@ -1,7 +1,7 @@
 // import { useEffect } from 'react'
 import { Info, LocalShipping } from '@mui/icons-material'
 import { Button, Input, Tooltip, Typography } from '@mui/material'
-import { ShippingCompanyTable } from './components/ShippingCompanyTable'
+import { ShippingCompanyTable } from './components/ShippingCompanyTable/index'
 import * as Styled from './styles'
 
 export function FreightManagement() {

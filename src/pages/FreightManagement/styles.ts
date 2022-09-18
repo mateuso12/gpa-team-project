@@ -1,7 +1,7 @@
 import { Box, Button, styled } from '@mui/material'
 
 export const Container = styled(Box)`
-  padding: 80px 35px 9px 100px;
+  padding: 80px 35px 9px 75px;
 
   h1 {
     margin-top: 30px;
@@ -11,6 +11,7 @@ export const NavTitle = styled('div')`
   display: flex;
   align-items: flex-end;
   gap: 0.5rem;
+  margin-left: 1rem;
 `
 export const SubtitlePage = styled('div')`
   display: flex;
