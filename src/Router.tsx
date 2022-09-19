@@ -13,7 +13,7 @@ export function Router() {
         <Route path="/search" element={<Search />} />
         <Route path="/home" element={<Home />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/freightManagement" element={<FreightManagement />} />
+        <Route path="/freight" element={<FreightManagement />} />
         <Route path="/logout" element={<Logout />} />
       </Route>
     </Routes>

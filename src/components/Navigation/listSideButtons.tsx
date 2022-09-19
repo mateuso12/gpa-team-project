@@ -66,7 +66,7 @@ export function ListSideButtons({ open }: ListButtonsProps) {
         </SideBarButton>
       </ListItem>
       <ListItem disablePadding sx={{ display: 'block' }}>
-        <SideBarButton to="/freightManagement">
+        <SideBarButton to="/freight">
           <ListItemButton sx={listItemButtonStyleProps}>
             <ListItemIcon sx={listItemIconStyleProps}>
               <LocalShipping />

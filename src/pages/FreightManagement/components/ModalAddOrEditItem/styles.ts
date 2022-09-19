@@ -44,6 +44,9 @@ export const CreateButton = styled(ButtonBase)(
   ({ theme }) => `
     color: white;
   background: ${theme.palette.primary.main};
+  &:hover {
+    background: #0062a3;
+  }
   `,
 )
 export const CancelButton = styled(ButtonBase)(

@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Add, CloudDownload } from '@mui/icons-material'
 import {
   Checkbox,
@@ -8,23 +9,30 @@ import {
   TableCell,
   TableContainer,
   TableHead,
+  // TablePagination,
   TableRow,
   Typography,
 } from '@mui/material'
-import { useState } from 'react'
 import { ModalAddOrEditItem } from '../ModalAddOrEditItem'
+import api from '../../../../services/global/api.js'
 import * as Styled from './styles'
 
 export function ShippingCompanyTable() {
-  const [openModal, setOpenModal] = useState(false)
+  // const { data } = useQuery<Freight[]>('freights', async () => {
+  //   const response = await api.get('/fulfillment/site/freight')
+  //   return response.data
+  // })
+  const [openCreateModal, setOpenCreateModal] = useState(false)
 
   function handleClickOpenModal() {
-    setOpenModal(true)
+    setOpenCreateModal(true)
   }
 
   function handleClickCloseModal() {
-    setOpenModal(false)
+    setOpenCreateModal(false)
   }
+
+  function handleClickEditFreight() {}
 
   return (
     <Styled.Container>
@@ -75,11 +83,11 @@ export function ShippingCompanyTable() {
               <TableCell>
                 <Checkbox />
               </TableCell>
-              <TableCell>123124</TableCell>
-              <TableCell>Transportadora 1</TableCell>
-              <TableCell>Tecnologia</TableCell>
-              <TableCell>1721 </TableCell>
-              <TableCell>Ativo</TableCell>
+              <TableCell>row.content.carrierCode</TableCell>
+              <TableCell>row.content.carrierName</TableCell>
+              <TableCell>row.content.carrierType</TableCell>
+              <TableCell>row.content.siteCode</TableCell>
+              <TableCell>row.content.active</TableCell>
               <TableCell>
                 <IconButton>
                   <img src="/src/assets/edit.svg" alt="" />
@@ -92,6 +100,7 @@ export function ShippingCompanyTable() {
       {/* <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
+        sx={{ display: 'flex', justifyContent: 'center' }}
         // count={rows.length}
         // rowsPerPage={rowsPerPage}
         // page={page}
@@ -99,7 +108,7 @@ export function ShippingCompanyTable() {
         // onRowsPerPageChange={handleChangeRowsPerPage}
       /> */}
       <ModalAddOrEditItem
-        open={openModal}
+        open={openCreateModal}
         handleClickCloseModal={handleClickCloseModal}
       />
     </Styled.Container>

@@ -11,10 +11,12 @@ import {
 } from '@mui/material'
 import { DialogForm } from './DialogForm'
 import * as Styled from './styles'
+import { useState } from 'react'
 
 interface AddOrEditItemProps {
   open: boolean
   handleClickCloseModal: () => void
+  // handleClickEditModal: (id: string) => void
 }
 
 export function ModalAddOrEditItem({
@@ -23,6 +25,15 @@ export function ModalAddOrEditItem({
 }: AddOrEditItemProps) {
   const theme = useTheme()
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'))
+  const [activeFreight, setActiveFreight] = useState(false)
+
+  function toggleActiveFreight() {
+    if (!activeFreight) {
+      setActiveFreight(true)
+    } else {
+      setActiveFreight(false)
+    }
+  }
 
   return (
     <Dialog
@@ -38,9 +49,12 @@ export function ModalAddOrEditItem({
           </Typography>
           <Styled.StatusBox>
             <Typography>Status de Frete:</Typography>
-            <Switch />
-            <Typography>Ativo</Typography>
-            {/* <Typography>Inativo</Typography> */}
+            <Switch onClick={toggleActiveFreight} />
+            {activeFreight ? (
+              <Typography>Ativo</Typography>
+            ) : (
+              <Typography>Inativo</Typography>
+            )}
           </Styled.StatusBox>
           <IconButton onClick={handleClickCloseModal}>
             <Close />

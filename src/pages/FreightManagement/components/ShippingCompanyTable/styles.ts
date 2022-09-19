@@ -17,7 +17,8 @@ export const Header = styled('div')`
 
   div {
     &:first-child {
-      margin-top: 20px;
+      position: relative;
+      margin-top: 10px;
     }
     &:last-child {
       display: flex;

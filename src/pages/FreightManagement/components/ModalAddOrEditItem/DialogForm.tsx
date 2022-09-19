@@ -1,73 +1,39 @@
-import { Info } from '@mui/icons-material'
-import {
-  Autocomplete,
-  InputLabel,
-  MenuItem,
-  TextField,
-  Tooltip,
-} from '@mui/material'
+import { Autocomplete, TextField } from '@mui/material'
 import { Box } from '@mui/system'
-import { HTMLInputTypeAttribute } from 'react'
+import { useForm } from 'react-hook-form'
 
-interface TextInputProps {
-  title: string
-  type?: HTMLInputTypeAttribute
-  tooltip?: boolean
-  tooltipTitle?: string
-}
+import { SelectInput, TextInput } from './Inputs'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as zod from 'zod'
 
-const TextInput = ({
-  title,
-  type,
-  tooltip = false,
-  tooltipTitle = '',
-}: TextInputProps) => (
-  <Box sx={{ width: '100%' }}>
-    <InputLabel sx={{ marginBottom: 1 }}> {title} </InputLabel>
-    {tooltip && (
-      <Tooltip title={tooltipTitle} placement="right">
-        <Info />
-      </Tooltip>
-    )}
-    <TextField
-      variant="standard"
-      sx={{ mr: 1 }}
-      helperText=" "
-      fullWidth
-      type={type}
-    />
-  </Box>
-)
+const newFreightFormValidationSchema = zod.object({
+  active: zod.boolean(),
+  assistant: zod.number(),
+  carrierCode: zod.number(),
+  carrierName: zod.string().min(1, 'Informe o nome da transportadora'),
+  carrierType: zod.string().min(1, 'Informe um tipo de transportadora'),
+  dailyValue: zod.number(),
+  kmFranchise: zod.number(),
+  nightSurcharge: zod.number(),
+  nightSurchargeFrom: zod.string(),
+  orderValue: zod.number(),
+  site: zod.object({
+    id: zod.number(),
+    storeId: zod.string(),
+  }),
+  sundayHoliday: zod.number(),
+  valuePerOrder: zod.number(),
+})
 
-const SelectInput = ({
-  title,
-  options,
-}: {
-  title: string
-  options: string[]
-}) => (
-  <>
-    <Box sx={{ width: '100%' }}>
-      <InputLabel sx={{ marginBottom: 1 }}> {title} </InputLabel>
-      <TextField
-        select
-        defaultValue={options[0]}
-        variant="standard"
-        sx={{ mr: 1 }}
-        helperText=" "
-        fullWidth
-      >
-        {options.map((option) => (
-          <MenuItem key={option} value={option}>
-            {option}
-          </MenuItem>
-        ))}
-      </TextField>
-    </Box>
-  </>
-)
+type NewFreightData = zod.infer<typeof newFreightFormValidationSchema>
 
 export function DialogForm() {
+  const newFreightForm = useForm<NewFreightData>({
+    resolver: zodResolver(newFreightFormValidationSchema),
+  })
+
+  const { register } = newFreightForm
+
   return (
     <>
       <form>
@@ -84,22 +50,28 @@ export function DialogForm() {
           }}
         >
           <SelectInput
+            id="carrierCode"
             title="Código da Transportadora"
             options={['teste1', 'teste2', 'teste3']}
           />
-          <TextInput title="Nome da Transportadora" />
+          <TextInput id="carrierName" title="Nome da Transportadora" />
           <SelectInput
+            id="carrierType"
             title="Tipo de Transportadora"
             options={['teste1', 'teste2', 'teste3']}
           />
-          <TextInput title="Franquia Km:" type="number" />
+          <TextInput id="kmFranchise" title="Franquia Km:" type="number" />
         </Box>
 
         <Box sx={{ display: 'flex', gap: '2rem', marginTop: '20px' }}>
-          <TextInput title="Valor de Km após franquia:" type="number" />
-          <TextInput title="Valor do pedido:" type="number" />
-          <TextInput title="Ajudante:" type="number" />
-          <TextInput title="Valor da Diária:" type="number" />
+          <TextInput
+            id="postFranchiseKmValue"
+            title="Valor de Km após franquia:"
+            type="number"
+          />
+          <TextInput id="orderValue" title="Valor do pedido:" type="number" />
+          <TextInput id="assistant" title="Ajudante:" type="number" />
+          <TextInput id="dailyValue" title="Valor da Diária:" type="number" />
         </Box>
 
         <Box
@@ -110,24 +82,31 @@ export function DialogForm() {
           }}
         >
           <SelectInput
+            id="sundayHoliday"
             title="Domingo/Feriado:"
             options={['test1', 'test', 'test3']}
           />
           <SelectInput
-            title="Domingo/Feriado:"
+            id="nightSurcharge"
+            title="Adicional Noturno:"
             options={['test1', 'test', 'test3']}
           />
-          <TextInput title="Adicional Noturno a Partir de:" type="time" />
+          <TextInput
+            id="nightSurchargeFrom"
+            title="Adicional Noturno a Partir de:"
+            type="time"
+          />
           <div style={{ width: '100%' }} />
         </Box>
 
         <Autocomplete
           multiple
-          id="tags-outlined"
+          id="site"
           options={top100Films}
           getOptionLabel={(option) => option.title}
           filterSelectedOptions
           sx={{ width: '30%' }}
+          {...register('site')}
           renderInput={(params) => (
             <TextField
               {...params}
