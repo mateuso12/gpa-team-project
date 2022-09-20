@@ -9,6 +9,7 @@ import {
 } from '@mui/material'
 import { MouseEvent, useState } from 'react'
 import { UserImage, HeaderContainer } from './styles'
+import imgLogo from '../../assets/logo.svg'
 
 export function NavItems() {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -16,7 +17,7 @@ export function NavItems() {
   return (
     <>
       <HeaderContainer>
-        <img src="src/assets/logo.svg" alt="Motoqueiro com baú" />
+        <img src={imgLogo} alt="Motoqueiro com baú" />
         <div>
           <UserImage alt="Imagem do usuário">MS</UserImage>
           <Typography>Mateus</Typography>

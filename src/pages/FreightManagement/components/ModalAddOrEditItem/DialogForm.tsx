@@ -1,42 +1,61 @@
-import { Autocomplete, TextField } from '@mui/material'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+import { Divider, TextField } from '@mui/material'
 import { Box } from '@mui/system'
 import { useForm } from 'react-hook-form'
 
-import { SelectInput, TextInput } from './Inputs'
+import {
+  SearchMultipleSelect,
+  SelectInput,
+  SwitchToggle,
+  TextInput,
+} from './Inputs'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as zod from 'zod'
+import * as Styled from './styles'
 
 const newFreightFormValidationSchema = zod.object({
   active: zod.boolean(),
-  assistant: zod.number(),
+  assistant: zod.string(),
   carrierCode: zod.number(),
   carrierName: zod.string().min(1, 'Informe o nome da transportadora'),
   carrierType: zod.string().min(1, 'Informe um tipo de transportadora'),
-  dailyValue: zod.number(),
-  kmFranchise: zod.number(),
+  dailyValue: zod.string(),
+  postFranchiseKmValue: zod.string(),
+  kmFranchise: zod.string(),
   nightSurcharge: zod.number(),
   nightSurchargeFrom: zod.string(),
-  orderValue: zod.number(),
-  site: zod.object({
-    id: zod.number(),
-    storeId: zod.string(),
-  }),
+  orderValue: zod.string(),
+  sites: zod.array(zod.string()),
   sundayHoliday: zod.number(),
-  valuePerOrder: zod.number(),
 })
 
 type NewFreightData = zod.infer<typeof newFreightFormValidationSchema>
 
-export function DialogForm() {
+interface DialogFormProps {
+  onSuccess: (data: Object) => void
+}
+
+export function DialogForm({ onSuccess }: DialogFormProps) {
   const newFreightForm = useForm<NewFreightData>({
     resolver: zodResolver(newFreightFormValidationSchema),
+    defaultValues: {
+      active: false,
+    },
   })
 
-  const { register } = newFreightForm
+  const { handleSubmit, control } = newFreightForm
 
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit(onSuccess)}>
+        <SwitchToggle
+          id="active-switch"
+          name="active"
+          title="Status do frete:"
+          control={control}
+        />
+        <Divider />
         <TextField
           placeholder="Utilitário"
           variant="outlined"
@@ -50,28 +69,63 @@ export function DialogForm() {
           }}
         >
           <SelectInput
-            id="carrierCode"
+            id="carrier-code-select"
             title="Código da Transportadora"
-            options={['teste1', 'teste2', 'teste3']}
+            options={[1, 2, 3]}
+            name={'carrierCode'}
+            control={control}
           />
-          <TextInput id="carrierName" title="Nome da Transportadora" />
+          <TextInput
+            id="carrier-name-field"
+            title="Nome da Transportadora"
+            name={'carrierName'}
+            control={control}
+          />
           <SelectInput
-            id="carrierType"
+            id="carrier-type-select"
             title="Tipo de Transportadora"
             options={['teste1', 'teste2', 'teste3']}
+            name={'carrierType'}
+            control={control}
           />
-          <TextInput id="kmFranchise" title="Franquia Km:" type="number" />
+          <TextInput
+            id="km-franchise-field"
+            title="Franquia Km:"
+            type="number"
+            name={'kmFranchise'}
+            control={control}
+          />
         </Box>
 
         <Box sx={{ display: 'flex', gap: '2rem', marginTop: '20px' }}>
           <TextInput
-            id="postFranchiseKmValue"
+            id="post-franchise-km-value-field"
             title="Valor de Km após franquia:"
             type="number"
+            name={'postFranchiseKmValue'}
+            control={control}
           />
-          <TextInput id="orderValue" title="Valor do pedido:" type="number" />
-          <TextInput id="assistant" title="Ajudante:" type="number" />
-          <TextInput id="dailyValue" title="Valor da Diária:" type="number" />
+          <TextInput
+            id="order-value-field"
+            title="Valor do pedido:"
+            type="number"
+            name={'orderValue'}
+            control={control}
+          />
+          <TextInput
+            id="assistant-field"
+            title="Ajudante:"
+            type="number"
+            name={'assistant'}
+            control={control}
+          />
+          <TextInput
+            id="daily-value-field"
+            title="Valor da Diária:"
+            type="number"
+            name={'dailyValue'}
+            control={control}
+          />
         </Box>
 
         <Box
@@ -82,50 +136,45 @@ export function DialogForm() {
           }}
         >
           <SelectInput
-            id="sundayHoliday"
+            id="sunday-holiday-select"
             title="Domingo/Feriado:"
-            options={['test1', 'test', 'test3']}
+            options={[10, 20, 30]}
+            name={'sundayHoliday'}
+            control={control}
           />
           <SelectInput
-            id="nightSurcharge"
+            id="night-surcharge-select"
             title="Adicional Noturno:"
-            options={['test1', 'test', 'test3']}
+            options={[10, 20, 30]}
+            name={'nightSurcharge'}
+            control={control}
           />
           <TextInput
-            id="nightSurchargeFrom"
+            id="night-surcharge-from-field"
             title="Adicional Noturno a Partir de:"
             type="time"
+            name={'nightSurchargeFrom'}
+            control={control}
           />
           <div style={{ width: '100%' }} />
         </Box>
 
-        <Autocomplete
-          multiple
-          id="site"
-          options={top100Films}
-          getOptionLabel={(option) => option.title}
-          filterSelectedOptions
-          sx={{ width: '30%' }}
-          {...register('site')}
-          renderInput={(params) => (
-            <TextField
-              {...params}
-              label="Lojas"
-              InputLabelProps={{ shrink: true }}
-            />
-          )}
+        <SearchMultipleSelect
+          id="sites-multiple-select"
+          name="sites"
+          control={control}
+          options={['teste1', 'teste2', 'teste3']}
         />
+
+        <Styled.FooterButtonsContainer>
+          <Styled.CancelButton id="cancel-freight-button">
+            Cancelar
+          </Styled.CancelButton>
+          <Styled.CreateButton id="submit-freight-button" type="submit">
+            Concluir
+          </Styled.CreateButton>
+        </Styled.FooterButtonsContainer>
       </form>
     </>
   )
 }
-
-const top100Films = [
-  { title: 'The Shawshank Redemption', year: 1994 },
-  { title: 'The Godfather', year: 1972 },
-  { title: 'The Godfather: Part II', year: 1974 },
-  { title: 'The Dark Knight', year: 2008 },
-  { title: '12 Angry Men', year: 1957 },
-  { title: "Schindler's List", year: 1993 },
-  { title: 'Pulp Fiction', year: 1994 },
-]

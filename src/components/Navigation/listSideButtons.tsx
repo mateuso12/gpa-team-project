@@ -8,6 +8,7 @@ import {
   ListItemText,
 } from '@mui/material'
 import { SideBarButton } from './styles'
+import imgCart from '../../assets/cart.svg'
 
 interface ListButtonsProps {
   open: Boolean
@@ -33,7 +34,7 @@ export function ListSideButtons({ open }: ListButtonsProps) {
   return (
     <List>
       <ListItem disablePadding sx={{ display: 'block' }}>
-        <SideBarButton to="/search">
+        <SideBarButton to="/pesquisa" title="Pesquisar">
           <ListItemButton sx={listItemButtonStyleProps}>
             <ListItemIcon sx={listItemIconStyleProps}>
               <Search />
@@ -43,7 +44,7 @@ export function ListSideButtons({ open }: ListButtonsProps) {
         </SideBarButton>
       </ListItem>
       <ListItem disablePadding sx={{ display: 'block' }}>
-        <SideBarButton to="/home">
+        <SideBarButton to="/tela-inicial" title="Tela inicial">
           <ListItemButton sx={listItemButtonStyleProps}>
             <ListItemIcon sx={listItemIconStyleProps}>
               <Store />
@@ -53,10 +54,10 @@ export function ListSideButtons({ open }: ListButtonsProps) {
         </SideBarButton>
       </ListItem>
       <ListItem disablePadding sx={{ display: 'block' }}>
-        <SideBarButton to="/cart">
+        <SideBarButton to="/carrinho" title="carrinho">
           <ListItemButton sx={listItemButtonStyleProps}>
             <ListItemIcon sx={listItemIconStyleProps}>
-              <img src="/src/assets/cart.svg" alt="Carrinho de compras" />
+              <img src={imgCart} alt="Carrinho de compras" />
             </ListItemIcon>
             <ListItemText
               primary="Status da compra"
@@ -66,7 +67,7 @@ export function ListSideButtons({ open }: ListButtonsProps) {
         </SideBarButton>
       </ListItem>
       <ListItem disablePadding sx={{ display: 'block' }}>
-        <SideBarButton to="/freight">
+        <SideBarButton to="/frete" title="Gestão de frete">
           <ListItemButton sx={listItemButtonStyleProps}>
             <ListItemIcon sx={listItemIconStyleProps}>
               <LocalShipping />
@@ -79,7 +80,7 @@ export function ListSideButtons({ open }: ListButtonsProps) {
         </SideBarButton>
       </ListItem>
       <ListItem disablePadding sx={{ display: 'block' }}>
-        <SideBarButton to="/logout">
+        <SideBarButton to="/sair" title="Sair">
           <ListItemButton sx={listItemButtonStyleProps}>
             <ListItemIcon sx={listItemIconStyleProps}>
               <ExitToApp />

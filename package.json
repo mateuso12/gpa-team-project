@@ -7,7 +7,10 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "cy:open": "npx cypress open"
+    "cy:open": "npx cypress open --env mode=e2e ",
+    "cy:open:mocked": "npx cypress open --env mode=mocked",
+    "cy:run:mocked": "npx cypress run --env mode=mocked",
+    "cy:run": "npx cypress run --env mode=e2e"
   },
   "dependencies": {
     "@emotion/react": "^11.10.4",
@@ -15,22 +18,24 @@
     "@hookform/resolvers": "^2.9.8",
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.5",
+    "@tanstack/react-query": "^4.3.9",
     "@types/axios": "^0.14.0",
     "axios": "^0.27.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.35.0",
-    "react-query": "^3.39.2",
     "react-router-dom": "^6.4.0",
     "zod": "^3.19.1"
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^1.1.3",
+    "@types/jest": "^29.0.3",
     "@types/node": "^18.7.18",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/styled-components": "^5.1.26",
     "@vitejs/plugin-react": "^2.1.0",
+    "cypress": "^10.8.0",
     "eslint": "^8.23.1",
     "typescript": "^4.6.4",
     "vite": "^3.1.0"

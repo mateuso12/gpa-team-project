@@ -10,11 +10,11 @@ export function Router() {
   return (
     <Routes>
       <Route path="/" element={<DefaultLayout />}>
-        <Route path="/search" element={<Search />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/cart" element={<Cart />} />
-        <Route path="/freight" element={<FreightManagement />} />
-        <Route path="/logout" element={<Logout />} />
+        <Route path="/pesquisa" element={<Search />} />
+        <Route path="/tela-inicial" element={<Home />} />
+        <Route path="/carrinho" element={<Cart />} />
+        <Route path="/frete" element={<FreightManagement />} />
+        <Route path="/sair" element={<Logout />} />
       </Route>
     </Routes>
   )

@@ -1,20 +1,18 @@
 import { ThemeProvider } from '@mui/material/styles'
-import { QueryClient, QueryClientProvider } from 'react-query'
 import { theme } from './styles/theme'
 import { Router } from './Router'
 import { BrowserRouter } from 'react-router-dom'
 import { CssBaseline } from '@mui/material'
-
-const queryClient = new QueryClient()
+import GpaProvider from './providers/gpa'
 
 export function App() {
   return (
     <ThemeProvider theme={theme}>
-      <QueryClientProvider client={queryClient}>
+      <GpaProvider>
         <BrowserRouter>
           <Router />
         </BrowserRouter>
-      </QueryClientProvider>
+      </GpaProvider>
       <CssBaseline />
     </ThemeProvider>
   )

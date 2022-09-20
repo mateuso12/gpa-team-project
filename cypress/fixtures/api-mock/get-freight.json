@@ -1,0 +1,30 @@
+{
+  "content": [
+    {
+      "active": true,
+      "carrierCode": 0,
+      "carrierName": "string",
+      "carrierType": "string",
+      "id": 0,
+      "siteCode": "string"
+    }
+  ],
+  "empty": true,
+  "first": true,
+  "last": true,
+  "number": 0,
+  "numberOfElements": 0,
+  "pageable": {
+    "page": 0,
+    "size": 0,
+    "sort": "string"
+  },
+  "size": 0,
+  "sort": {
+    "empty": true,
+    "sorted": true,
+    "unsorted": true
+  },
+  "totalElements": 0,
+  "totalPages": 0
+}

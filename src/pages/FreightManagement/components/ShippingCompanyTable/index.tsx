@@ -1,4 +1,6 @@
-import { useState } from 'react'
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+import { useEffect, useState, useContext } from 'react'
 import { Add, CloudDownload } from '@mui/icons-material'
 import {
   Checkbox,
@@ -8,31 +10,33 @@ import {
   TableBody,
   TableCell,
   TableContainer,
+  TableFooter,
   TableHead,
-  // TablePagination,
+  TablePagination,
   TableRow,
   Typography,
 } from '@mui/material'
 import { ModalAddOrEditItem } from '../ModalAddOrEditItem'
-import api from '../../../../services/global/api.js'
 import * as Styled from './styles'
+import { GpaContext } from '../../../../providers/gpa'
+import { Freight } from '../../../../interfaces/gpa/freight'
+import editIcon from '../../../../assets/edit.svg'
 
 export function ShippingCompanyTable() {
-  // const { data } = useQuery<Freight[]>('freights', async () => {
-  //   const response = await api.get('/fulfillment/site/freight')
-  //   return response.data
-  // })
-  const [openCreateModal, setOpenCreateModal] = useState(false)
+  const gpaContext = useContext(GpaContext)
+  const [openModal, setOpenModal] = useState(false)
 
-  function handleClickOpenModal() {
-    setOpenCreateModal(true)
+  useEffect(() => {
+    gpaContext.loadFreights()
+  }, [])
+
+  function handleClickOpenFreightModal() {
+    setOpenModal(true)
   }
 
-  function handleClickCloseModal() {
-    setOpenCreateModal(false)
+  function handleClickCloseFreightModal() {
+    setOpenModal(false)
   }
-
-  function handleClickEditFreight() {}
 
   return (
     <Styled.Container>
@@ -44,7 +48,10 @@ export function ShippingCompanyTable() {
           <Styled.DownloadTableButton>
             <CloudDownload /> Baixar Tabela
           </Styled.DownloadTableButton>
-          <Styled.CreateButton onClick={handleClickOpenModal}>
+          <Styled.CreateButton
+            id="create-freight-button"
+            onClick={handleClickOpenFreightModal}
+          >
             <Add />
             Criar
           </Styled.CreateButton>
@@ -78,38 +85,50 @@ export function ShippingCompanyTable() {
             </TableRow>
           </TableHead>
 
-          <TableBody sx={{ flex: 1 }}>
-            <TableRow>
-              <TableCell>
-                <Checkbox />
-              </TableCell>
-              <TableCell>row.content.carrierCode</TableCell>
-              <TableCell>row.content.carrierName</TableCell>
-              <TableCell>row.content.carrierType</TableCell>
-              <TableCell>row.content.siteCode</TableCell>
-              <TableCell>row.content.active</TableCell>
-              <TableCell>
-                <IconButton>
-                  <img src="/src/assets/edit.svg" alt="" />
-                </IconButton>
-              </TableCell>
-            </TableRow>
+          <TableBody sx={{ flex: 1, height: 300 }}>
+            {gpaContext?.freights?.content?.map((freight: Freight) => {
+              return (
+                <TableRow key={freight.id}>
+                  <TableCell>
+                    <Checkbox />
+                  </TableCell>
+                  <TableCell>{freight.carrierCode}</TableCell>
+                  <TableCell>{freight.carrierName}</TableCell>
+                  <TableCell>{freight.carrierType}</TableCell>
+                  <TableCell>{freight.siteCode}</TableCell>
+                  {freight.active ? (
+                    <TableCell>
+                      <Typography color="secondary">Ativo</Typography>
+                    </TableCell>
+                  ) : (
+                    <TableCell>Inativo</TableCell>
+                  )}
+                  <TableCell>
+                    <IconButton>
+                      <img src={editIcon} alt="" />
+                    </IconButton>
+                  </TableCell>
+                </TableRow>
+              )
+            })}
           </TableBody>
         </Table>
       </TableContainer>
-      {/* <TablePagination
-        rowsPerPageOptions={[5, 10, 25]}
-        component="div"
-        sx={{ display: 'flex', justifyContent: 'center' }}
-        // count={rows.length}
-        // rowsPerPage={rowsPerPage}
-        // page={page}
-        // onPageChange={handleChangePage}
-        // onRowsPerPageChange={handleChangeRowsPerPage}
-      /> */}
+      <TableFooter>
+        <TablePagination
+          rowsPerPageOptions={[5, 10, 25]}
+          component="div"
+          sx={{ display: 'flex', justifyContent: 'center' }}
+          count={10}
+          rowsPerPage={10}
+          page={1}
+          // onPageChange={handleChangePage}
+          // onRowsPerPageChange={handleChangeRowsPerPage}
+        />
+      </TableFooter>
       <ModalAddOrEditItem
-        open={openCreateModal}
-        handleClickCloseModal={handleClickCloseModal}
+        open={openModal}
+        handleClickCloseModal={handleClickCloseFreightModal}
       />
     </Styled.Container>
   )
