@@ -24,7 +24,8 @@ No projeto foram utilizadas as seguintes ferramentas:
 Para instalar o GPA, siga estas etapas:
 
 ```
-git clone repo
+git clone https://github.com/mateuso12/gpa-team-project.git
+
 ```
 
 ## ☕ Usando <nome_do_projeto>
@@ -32,9 +33,21 @@ git clone repo
 Para usar <nome_do_projeto>, siga estas etapas:
 
 ```
+cd gpa-team-project
+
 npm install
 
 npm run dev
+
+```
+
+## Testes
+```
+// teste integrado
+npm run cy:[open|run]
+
+// teste mockado
+npm run cy:[open|run]:mocked
 ```
 
 [⬆ Voltar ao topo](#gpa)
