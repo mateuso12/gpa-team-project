@@ -9,6 +9,7 @@ import {
   StoresApiResponse,
 } from '../interfaces/gpa'
 import * as gpa from '../services/gpa'
+import { v4 as uuidv4 } from 'uuid'
 
 interface GpaContextProps {
   freights: FreightsApiResponse
@@ -18,9 +19,14 @@ interface GpaContextProps {
   loadFreights: () => void
   loadFreight: (id: string) => void
   postFreight: (payload: Freight) => void
-  putFreight: (id: string, payload: Freight) => void
+  putFreight: (payload: Freight) => void
   loadShippingCarriers: () => void
   loadStores: () => void
+}
+
+export const ACTIONS = {
+  CREATE_FREIGHT: 'FREIGHT/CREATE',
+  UPDATE_FREIGHT: 'FREIGHT/UPDATE',
 }
 
 export const GpaContext = createContext({} as GpaContextProps)
@@ -33,6 +39,8 @@ export default function GpaProvider({ children }) {
   const [freight, setFreight] = useState<FreightsApiResponse>(
     {} as FreightsApiResponse,
   )
+
+  const [action, setAction] = useState({})
 
   const [shippingCarriers, setShippingCarriers] =
     useState<ShippingCarriersApiResponse>({} as ShippingCarriersApiResponse)
@@ -65,14 +73,30 @@ export default function GpaProvider({ children }) {
       sites: payload.sites,
       sundayHoliday: Number(payload.sundayHoliday),
       valuePerOrder: Number(payload.orderValue),
-      id: 0,
+      id: uuidv4(),
     }
     await gpa.postFreight(formattedPayload)
     loadFreights()
   }
 
-  async function putFreight(id: string, payload: Freight): Promise<void> {
-    await gpa.putFreight(id, payload)
+  async function putFreight(payload: Freight): Promise<void> {
+    const formattedPayload = {
+      active: payload.active,
+      assistant: Number(payload.assistant),
+      carrierCode: Number(payload.carrierCode),
+      dailyValue: Number(payload.dailyValue),
+      postFranchiseKmValue: Number(payload.postFranchiseKmValue),
+      kmFranchise: Number(payload.kmFranchise),
+      nightSurcharge: Number(payload.nightSurcharge),
+      nightSurchargeFrom: payload.nightSurchargeFrom,
+      orderValue: Number(payload.orderValue),
+      sites: payload.sites,
+      sundayHoliday: Number(payload.sundayHoliday),
+      valuePerOrder: Number(payload.orderValue),
+      id: action.data.freightId,
+    }
+    await gpa.putFreight(action.data.freightId, formattedPayload)
+    loadFreights()
   }
 
   async function loadShippingCarriers(): Promise<void> {
@@ -98,6 +122,9 @@ export default function GpaProvider({ children }) {
         putFreight,
         loadShippingCarriers,
         loadStores,
+        action,
+        setAction,
+        ACTIONS,
       }}
     >
       {children}

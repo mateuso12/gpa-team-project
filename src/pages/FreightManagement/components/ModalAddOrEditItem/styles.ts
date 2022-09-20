@@ -1,7 +1,16 @@
-import { Box, Button, DialogTitle, styled } from '@mui/material'
+import {
+  Box,
+  Button,
+  DialogTitle,
+  styled,
+  Typography,
+  Divider as MuiDivider,
+  TextField as MuiTextField,
+} from '@mui/material'
 
 export const PaperContainer = styled('div')`
   padding: 55px 55px;
+  overflow-y: hidden;
 `
 
 export const DialogTitleContainer = styled(DialogTitle)`
@@ -11,17 +20,35 @@ export const DialogTitleContainer = styled(DialogTitle)`
   align-items: center;
 
   height: 100%;
-  padding-bottom: 66px;
 `
 
-export const StatusBox = styled(Box)`
+export const ToggleContainer = styled(Box)`
   display: flex;
-  position: relative;
+  justify-content: end;
   align-items: center;
 
-  top: 60px;
-  left: 260px;
+  margin-right: 4rem;
 `
+export const ToggleStatus = styled(Typography)`
+  width: 2rem;
+`
+export const TextFieldDisabled = styled(MuiTextField)`
+  width: 30%;
+  margin-bottom: 3rem;
+`
+
+export const ToggleLabel = styled(Typography)(
+  ({ theme }) => `
+  font-size: 1rem;
+  line-height: 26px;
+  letter-spacing: 0.15px;
+  font-weight: 500;
+  color: ${theme.palette.grey['600']}
+
+  margin-right: 0.75rem;
+`,
+)
+
 export const FooterButtonsContainer = styled('footer')`
   display: flex;
   width: 100%;
@@ -55,3 +82,20 @@ export const CancelButton = styled(ButtonBase)(
   box-shadow: 0 1px 5px rgba(0,0,0,0.4);
 `,
 )
+
+export const InputWrapper = styled(Box)`
+  margin-bottom: 2rem;
+  width: 100%;
+`
+export const FormRow = styled(Box)`
+  display: flex;
+  gap: 3rem;
+`
+
+export const FormBodyContainer = styled(Box)`
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  max-height: 25rem;
+  padding-top: 2rem;
+`

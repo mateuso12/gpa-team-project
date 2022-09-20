@@ -21,7 +21,7 @@ No projeto foram utilizadas as seguintes ferramentas:
 
 ## 🚀 Instalando
 
-Para instalar o GPA, siga estas etapas:
+Para instalar o gpa-project-team, siga estas etapas:
 
 ```
 git clone https://github.com/mateuso12/gpa-team-project.git
@@ -30,7 +30,7 @@ git clone https://github.com/mateuso12/gpa-team-project.git
 
 ## ☕ Usando <nome_do_projeto>
 
-Para usar <nome_do_projeto>, siga estas etapas:
+Para usar gpa-project-team, siga estas etapas:
 
 ```
 cd gpa-team-project

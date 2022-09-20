@@ -4,12 +4,16 @@ import {
   FreightsApiResponse,
   ShippingCarriersApiResponse,
   StoresApiResponse,
-} from '../interfaces/gpa'
-import { AxiosResponse } from '../interfaces/axios'
+} from '../../interfaces/gpa'
+import { AxiosResponse } from '../../interfaces/axios'
+import { mockServer } from '../mockServer'
+import { ENDPOINTS } from './mockServer'
 
 const gpaClient = axios.create({
   baseURL: 'https://9772-186-205-17-174.ngrok.io/fulfillment/site',
 })
+
+mockServer(gpaClient, 'GPA', ENDPOINTS)
 
 export const fetchFreights = async (): Promise<
   AxiosResponse<FreightsApiResponse>

@@ -7,9 +7,7 @@ import {
   Switch,
   TextField,
   Tooltip,
-  Typography,
 } from '@mui/material'
-import { Box } from '@mui/system'
 import { HTMLInputTypeAttribute } from 'react'
 import { Control, Controller } from 'react-hook-form'
 import * as Styled from './styles'
@@ -34,7 +32,7 @@ export function TextInput({
   control,
 }: TextInputProps) {
   return (
-    <Box sx={{ width: '100%' }}>
+    <Styled.InputWrapper>
       <InputLabel sx={{ marginBottom: 1 }}> {title} </InputLabel>
       {tooltip && (
         <Tooltip title={tooltipTitle} placement="right">
@@ -55,7 +53,7 @@ export function TextInput({
           />
         )}
       />
-    </Box>
+    </Styled.InputWrapper>
   )
 }
 
@@ -74,55 +72,48 @@ export const SelectInput = ({
   name,
   control,
 }: InputSelectProps) => (
-  <>
-    <Box sx={{ width: '100%' }}>
-      <InputLabel sx={{ marginBottom: 1 }}> {title} </InputLabel>
-      <Controller
-        name={name}
-        control={control}
-        render={({ field: { onChange, value } }) => (
-          <TextField
-            id={id}
-            select
-            variant="standard"
-            sx={{ mr: 1 }}
-            helperText=" "
-            fullWidth
-            onChange={onChange}
-            value={value}
-          >
-            {options.map((option) => (
-              <MenuItem key={option} value={option}>
-                {option}
-              </MenuItem>
-            ))}
-          </TextField>
-        )}
-      />
-    </Box>
-  </>
+  <Styled.InputWrapper>
+    <InputLabel sx={{ marginBottom: 1 }}> {title} </InputLabel>
+    <Controller
+      name={name}
+      control={control}
+      render={({ field: { onChange, value } }) => (
+        <TextField
+          id={id}
+          select
+          variant="standard"
+          sx={{ mr: 1 }}
+          fullWidth
+          onChange={onChange}
+          value={value}
+        >
+          {options.map((option) => (
+            <MenuItem key={option} value={option}>
+              {option}
+            </MenuItem>
+          ))}
+        </TextField>
+      )}
+    />
+  </Styled.InputWrapper>
 )
 
 export function SwitchToggle({ title, id, name, control }: TextInputProps) {
   return (
-    <Box sx={{ width: '100%' }}>
-      <Controller
-        name={name}
-        control={control}
-        render={({ field: { onChange, value } }) => (
-          <Styled.StatusBox>
-            <Typography>{title}</Typography>
+    <Controller
+      name={name}
+      control={control}
+      render={({ field: { onChange, value } }) => (
+        <>
+          <Styled.ToggleLabel>{title}</Styled.ToggleLabel>
 
-            <Switch id={id} onChange={onChange} />
-            {value ? (
-              <Typography>Ativo</Typography>
-            ) : (
-              <Typography>Inativo</Typography>
-            )}
-          </Styled.StatusBox>
-        )}
-      />
-    </Box>
+          <Switch id={id} onChange={onChange} />
+          <Styled.ToggleStatus>
+            {value ? 'Ativo' : 'Inativo'}
+          </Styled.ToggleStatus>
+        </>
+      )}
+    />
   )
 }
 
@@ -141,31 +132,29 @@ export const SearchMultipleSelect = ({
   name,
   control,
 }: SearchMultipleSelectProps) => (
-  <>
-    <Box sx={{ width: '100%' }}>
-      <InputLabel sx={{ marginBottom: 1 }}> {title} </InputLabel>
-      <Controller
-        name={name}
-        control={control}
-        render={({ field: { value, onChange } }) => (
-          <Autocomplete
-            multiple
-            id={id}
-            options={options}
-            filterSelectedOptions
-            onChange={(e, newValue) => onChange(newValue)}
-            value={value}
-            sx={{ width: '30%' }}
-            renderInput={(params) => (
-              <TextField
-                {...params}
-                label="Lojas"
-                InputLabelProps={{ shrink: true }}
-              />
-            )}
-          />
-        )}
-      />
-    </Box>
-  </>
+  <Styled.InputWrapper>
+    <InputLabel sx={{ marginBottom: 1 }}> {title} </InputLabel>
+    <Controller
+      name={name}
+      control={control}
+      render={({ field: { value, onChange } }) => (
+        <Autocomplete
+          multiple
+          id={id}
+          options={options}
+          filterSelectedOptions
+          onChange={(e, newValue) => onChange(newValue)}
+          value={value}
+          sx={{ width: '30%' }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Lojas"
+              InputLabelProps={{ shrink: true }}
+            />
+          )}
+        />
+      )}
+    />
+  </Styled.InputWrapper>
 )

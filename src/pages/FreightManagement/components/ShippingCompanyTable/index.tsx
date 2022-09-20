@@ -30,7 +30,18 @@ export function ShippingCompanyTable() {
     gpaContext.loadFreights()
   }, [])
 
-  function handleClickOpenFreightModal() {
+  function handleClickOpenCreateFreightModal() {
+    gpaContext.setAction({ id: gpaContext.ACTIONS.CREATE_FREIGHT })
+    setOpenModal(true)
+  }
+
+  function handleClickOpenEditFreightModal(id: string) {
+    gpaContext.setAction({
+      id: gpaContext.ACTIONS.UPDATE_FREIGHT,
+      data: {
+        freightId: id,
+      },
+    })
     setOpenModal(true)
   }
 
@@ -42,7 +53,7 @@ export function ShippingCompanyTable() {
     <Styled.Container>
       <Styled.Header>
         <div>
-          <Typography variant="body2">4 Itens selecionados</Typography>
+          <Typography variant="body1">4 Itens selecionados</Typography>
         </div>
         <div>
           <Styled.DownloadTableButton>
@@ -50,7 +61,7 @@ export function ShippingCompanyTable() {
           </Styled.DownloadTableButton>
           <Styled.CreateButton
             id="create-freight-button"
-            onClick={handleClickOpenFreightModal}
+            onClick={handleClickOpenCreateFreightModal}
           >
             <Add />
             Criar
@@ -104,7 +115,11 @@ export function ShippingCompanyTable() {
                     <TableCell>Inativo</TableCell>
                   )}
                   <TableCell>
-                    <IconButton>
+                    <IconButton
+                      onClick={() =>
+                        handleClickOpenEditFreightModal(freight.id)
+                      }
+                    >
                       <img src={editIcon} alt="" />
                     </IconButton>
                   </TableCell>
@@ -121,6 +136,7 @@ export function ShippingCompanyTable() {
           sx={{ display: 'flex', justifyContent: 'center' }}
           count={10}
           rowsPerPage={10}
+          labelRowsPerPage="Itens por página"
           page={1}
           // onPageChange={handleChangePage}
           // onRowsPerPageChange={handleChangeRowsPerPage}

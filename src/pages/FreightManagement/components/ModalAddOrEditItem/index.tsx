@@ -32,12 +32,37 @@ export function ModalAddOrEditItem({
 
   async function handleSubmitFreight(payload: Object) {
     try {
-      gpaContext.postFreight(payload)
+      switch (gpaContext.action.id) {
+        case gpaContext.ACTIONS.CREATE_FREIGHT: {
+          await gpaContext.postFreight(payload)
+          setOpenSuccessSnackbar(true)
+          break
+        }
+        case gpaContext.ACTIONS.UPDATE_FREIGHT: {
+          await gpaContext.putFreight(payload)
+          setOpenSuccessSnackbar(true)
+          break
+        }
+        default: {
+          break
+        }
+      }
       handleClickCloseModal()
-      setOpenSuccessSnackbar(true)
     } catch (err) {}
-    // if (status === 200) {
-    // }
+  }
+
+  function getSuccessSnackbarMessage() {
+    switch (gpaContext.action.id) {
+      case gpaContext.ACTIONS.CREATE_FREIGHT: {
+        return 'Cadastro criado com Sucesso!'
+      }
+      case gpaContext.ACTIONS.UPDATE_FREIGHT: {
+        return 'Cadastro editado com Sucesso!'
+      }
+      default: {
+        return 'Ação Realizada com Sucesso!'
+      }
+    }
   }
 
   return (
@@ -69,13 +94,13 @@ export function ModalAddOrEditItem({
         onClose={() => setOpenSuccessSnackbar(false)}
       >
         <Alert
-          id="post-freight-success"
+          id="post-freight-suc"
           onClose={() => setOpenSuccessSnackbar(false)}
-          severity="success"
+          variant="filled"
           color="secondary"
           sx={{ width: '100%' }}
         >
-          Cadastro criado com Sucesso!
+          {getSuccessSnackbarMessage()}
         </Alert>
       </Snackbar>
     </>

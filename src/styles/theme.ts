@@ -9,7 +9,8 @@ export const theme = createTheme({
       main: '#409A3C',
     },
     grey: {
-      600: '#66605E',
+      500: '#66605E',
+      600: '#4E5256',
     },
   },
   typography: {
@@ -32,10 +33,6 @@ export const theme = createTheme({
       fontSize: '0.875rem',
       fontWeight: 400,
       color: '#26272A',
-    },
-    subtitle1: {
-      fontSize: '0.75rem',
-      fontWeight: 400,
     },
   },
 })

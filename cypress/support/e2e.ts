@@ -47,7 +47,6 @@ beforeEach(() => {
   if (Cypress.env('mode') === 'e2e') {
     return null
   }
-
   const getFreightsConfig = getApiEndpointConfig(
     API_CONFIG.ENDPOINTS.GET_FREIGHTS,
   )
